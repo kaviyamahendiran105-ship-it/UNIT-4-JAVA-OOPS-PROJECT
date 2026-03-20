@@ -1,0 +1,110 @@
+import java.util.*;
+
+class InventorySystem {
+
+    HashMap<String, Integer> inventory = new HashMap<>();
+    Scanner sc = new Scanner(System.in);
+
+    // Add Product
+    void addProduct() {
+        System.out.print("Enter Product Name: ");
+        String name = sc.next();
+
+        System.out.print("Enter Quantity: ");
+        int qty = sc.nextInt();
+
+        inventory.put(name, qty);
+        System.out.println("Product Added Successfully");
+    }
+
+    // Update Stock
+    void updateStock() {
+        System.out.print("Enter Product Name: ");
+        String name = sc.next();
+
+        if (inventory.containsKey(name)) {
+            System.out.print("Enter New Quantity: ");
+            int qty = sc.nextInt();
+
+            inventory.put(name, qty);
+            System.out.println("Stock Updated");
+        } else {
+            System.out.println("Product Not Found");
+        }
+    }
+
+    // View Inventory
+    void viewInventory() {
+        System.out.println("\nInventory List:");
+
+        for (String key : inventory.keySet()) {
+            System.out.println(key + " : " + inventory.get(key));
+        }
+    }
+
+    // Remove Product
+    void removeProduct() {
+        System.out.print("Enter Product Name to Remove: ");
+        String name = sc.next();
+
+        if (inventory.containsKey(name)) {
+            inventory.remove(name);
+            System.out.println("Product Removed");
+        } else {
+            System.out.println("Product Not Found");
+        }
+    }
+
+    // Menu (Proper Iteration)
+    void menu() {
+
+        int choice = 0;
+
+        while (choice != 5) {
+
+            System.out.println("\n----- Inventory Menu -----");
+            System.out.println("1 Add Product");
+            System.out.println("2 Update Stock");
+            System.out.println("3 View Inventory");
+            System.out.println("4 Remove Product");
+            System.out.println("5 Exit");
+
+            System.out.print("Enter Choice: ");
+            choice = sc.nextInt();
+
+            if (choice == 1) {
+                addProduct();
+            }
+
+            else if (choice == 2) {
+                updateStock();
+            }
+
+            else if (choice == 3) {
+                viewInventory();
+            }
+
+            else if (choice == 4) {
+                removeProduct();
+            }
+
+            else if (choice == 5) {
+                System.out.println("Exiting Program...");
+            }
+
+            else {
+                System.out.println("Invalid Choice");
+            }
+        }
+    }
+}
+
+// Main Class
+public class Main {
+
+    public static void main(String[] args) {
+
+        InventorySystem obj = new InventorySystem();
+        obj.menu();
+    }
+}
